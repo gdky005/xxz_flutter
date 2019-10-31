@@ -3,16 +3,24 @@ import 'package:flutter/material.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // 这个 Widget 是程序的根节点
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // 当前应用的 主题，会包含一些颜色样式
+        // This is the theme of your application.
+        //
+        // Try running your application with "flutter run". You'll see the
+        // application has a blue toolbar. Then, without quitting the app, try
+        // changing the primarySwatch below to Colors.green and then invoke
+        // "hot reload" (press "r" in the console where you ran "flutter run",
+        // or simply save your changes to "hot reload" in a Flutter IDE).
+        // Notice that the counter didn't reset back to zero; the application
+        // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter New IOS'),
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -20,7 +28,15 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
-  // StatefulWidget 中所有的变量都必须是 final，否则编译器会有警告。
+  // This widget is the home page of your application. It is stateful, meaning
+  // that it has a State object (defined below) that contains fields that affect
+  // how it looks.
+
+  // This class is the configuration for the state. It holds the values (in this
+  // case the title) provided by the parent (in this case the App widget) and
+  // used by the build method of the State. Fields in a Widget subclass are
+  // always marked "final".
+
   final String title;
 
   @override
@@ -32,42 +48,59 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
-      // setState 里面的内容发生改变会通知 Flutter 的框架，Flutter 框架然后通知
-      // 当前组件调用 build 重新构建, 从而显示最新的值。
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
       _counter++;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // 每次重新调用 setState, 该方法都会执行。
-    // Flutter 框架对再次运行该 build 方法进行了优化，可以更快的显示，而不用单独更改其内部的小部件的实例。
+    // This method is rerun every time setState is called, for instance as done
+    // by the _incrementCounter method above.
+    //
+    // The Flutter framework has been optimized to make rerunning build methods
+    // fast, so that you can just rebuild anything that needs updating rather
+    // than having to individually change instances of widgets.
+
     return Scaffold(
       appBar: AppBar(
-        // 获取 MyHomePage 里面的 title，可以在 _MyHomePageState 中直接使用 widget.title。widget 表示 MyHomePage 的实例。
         title: Text(widget.title),
       ),
       body: Center(
-        // Center 是一个可以让其子内容/组件居中的组件。
         child: Column(
-          // 设置一个竖向排列的布局。
-          mainAxisAlignment: MainAxisAlignment.center, // 每一行居中
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
               'You have pushed the button this many times:',
             ),
             Text(
-              '$_counter', // 显示当前的计数值
-              style: Theme.of(context).textTheme.display1, // 字的颜色默认样式
+              '$_counter',
+              style: Theme.of(context).textTheme.display1,
+            ),
+            Expanded(
+              child: flatButton(context),
             ),
           ],
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // 最后这个逗号，可以使自动格式化效果更好。
+        onPressed: () => _incrementCounter(),
+        child: Icon(Icons.favorite),
+      ),
+    );
+  }
+
+  FlatButton flatButton(BuildContext context) {
+    return FlatButton(
+      textColor: Colors.white,
+      color: Theme.of(context).accentColor,
+      child: Text("FlatButton"),
+      onPressed: () {},
     );
   }
 }
