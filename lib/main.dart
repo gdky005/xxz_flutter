@@ -72,26 +72,19 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-            Expanded(
-              child: flatButton(context),
-            ),
+            Icon(Icons.favorite),
+            Icon(Icons.music_note, color: Colors.blueAccent, size: 64),
+            Icon(Icons.android, color: Colors.blueAccent, size: 100),
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _incrementCounter(),
-        child: Icon(Icons.favorite),
-      ),
+//      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+//      floatingActionButton: FloatingActionButton(
+//        onPressed: () => _incrementCounter(),
+//        child: Icon(Icons.favorite),
+//      ),
     );
   }
 
