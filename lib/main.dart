@@ -67,25 +67,35 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            Icon(Icons.favorite),
-            Icon(Icons.music_note, color: Colors.blueAccent, size: 64),
-            Icon(Icons.android, color: Colors.blueAccent, size: 100),
-          ],
+        appBar: AppBar(
+          title: Text(widget.title),
         ),
-      ),
-//      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-//      floatingActionButton: FloatingActionButton(
-//        onPressed: () => _incrementCounter(),
-//        child: Icon(Icons.favorite),
-//      ),
-    );
+        body: ListView.custom(
+          itemExtent: 40.0,
+          childrenDelegate: MyChildrenDelegate(
+            (BuildContext context, int index) {
+              return new Container(
+                  child: new Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  new Text(
+                    "name $index",
+                    style: new TextStyle(fontSize: 18.0, color: Colors.red),
+                  ),
+                  new Text(
+                    "age $index",
+                    style: new TextStyle(fontSize: 18.0, color: Colors.green),
+                  ),
+                  new Text(
+                    "content $index",
+                    style: new TextStyle(fontSize: 18.0, color: Colors.blue),
+                  ),
+                ],
+              ));
+            },
+            childCount: 20,
+          ),
+        ));
   }
 
   FlatButton flatButton(BuildContext context) {
@@ -95,5 +105,35 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Text("FlatButton"),
       onPressed: () {},
     );
+  }
+}
+
+/**
+ * 继承SliverChildBuilderDelegate  可以对列表的监听
+ */
+// ignore: slash_for_doc_comments
+class MyChildrenDelegate extends SliverChildBuilderDelegate {
+  MyChildrenDelegate(
+    Widget Function(BuildContext, int) builder, {
+    int childCount,
+    bool addAutomaticKeepAlive = true,
+    bool addRepaintBoundaries = true,
+  }) : super(builder,
+            childCount: childCount,
+            addAutomaticKeepAlives: addAutomaticKeepAlive,
+            addRepaintBoundaries: addRepaintBoundaries);
+
+  ///监听 在可见的列表中 显示的第一个位置和最后一个位置
+  @override
+  void didFinishLayout(int firstIndex, int lastIndex) {
+    print('firstIndex: $firstIndex, lastIndex: $lastIndex');
+  }
+
+  ///可不重写 重写不能为null  默认是true  添加进来的实例与之前的实例是否相同 相同返回true 反之false
+  ///listView 暂时没有看到应用场景 源码中使用在 SliverFillViewport 中
+  @override
+  bool shouldRebuild(SliverChildBuilderDelegate oldDelegate) {
+    print("oldDelegate$oldDelegate");
+    return super.shouldRebuild(oldDelegate);
   }
 }
