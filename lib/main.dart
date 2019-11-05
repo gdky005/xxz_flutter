@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
-      showPerformanceOverlay: true,
     );
   }
 }
@@ -60,74 +59,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            ListTile(title: Text('标题')),
-            ListTile(
-              title: Text('标题 2 '),
-              subtitle: Text('副标题 2'),
-            ),
-            ListTile(
-              title: Text('标题 3（字体更小）'),
-              subtitle: Text('副标题 3'),
-              dense: true,
-            ),
-            ListTile(
-              leading: Icon(Icons.star),
-              title: Text('标题 4（前面带星星）'),
-            ),
-            ListTile(
-              title: Text('标题 5（左边有箭头）'),
-              trailing: Icon(Icons.keyboard_arrow_right),
-            ),
-            ListTile(
-              title: Text('标题 6（边距为 0）'),
-              trailing: Icon(Icons.keyboard_arrow_right),
-              contentPadding: EdgeInsets.symmetric(
-                  horizontal: 0), //设置内容边距，默认是 16，但我们在这里设置为 0
-            ),
-            ListTile(
-              title: Text('标题 7 （选中状态）'),
-              trailing: Icon(Icons.keyboard_arrow_right),
-              selected: true,
-            ),
-            ListTile(
-              title: Text('标题 8 （点击事件）'),
-              onTap: () {
-                print("点击了");
-              },
-              onLongPress: () {
-                print("长按了");
-              },
-            ),
-            ListTile(
-              title: Text('标题 9 （禁用状态）'),
-              onTap: () {
-                // this will not get called
-              },
-              enabled: false,
-            ),
-          ],
-        ),
-      ),
-//      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-//      floatingActionButton: FloatingActionButton(
-//        onPressed: () => _incrementCounter(),
-//        child: Icon(Icons.favorite),
-//      ),
+      body: _bodyView(),
     );
   }
 
@@ -138,5 +74,41 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Text("FlatButton"),
       onPressed: () {},
     );
+  }
+
+  Widget _bodyView() {
+    Widget bodyWidget = GridView(
+      //SliverGridDelegateWithFixedCrossAxisCount可以直接指定每行（列）显示多少个Item，SliverGridDelegateWithMaxCrossAxisExtent会根据GridView的宽度和你设置的每个的宽度来自动计算没行显示多少个Item
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2, //每行2个
+        mainAxisSpacing: 10.0, //主轴方向间距
+        crossAxisSpacing: 10.0, //水平方向间距
+        childAspectRatio: 1.0, //纵轴缩放比例
+      ),
+      children: <Widget>[
+        Container(
+          color: Colors.grey[200],
+          child: Center(child: Text("第1组")),
+        ),
+        Container(
+          color: Colors.grey[200],
+          child: Center(child: Text("第2组")),
+        ),
+        Container(
+          color: Colors.grey[200],
+          child: Center(child: Text("第3组")),
+        ),
+        Container(
+          color: Colors.grey[200],
+          child: Center(child: Text("第4组")),
+        ),
+        Container(
+          color: Colors.grey[200],
+          child: Center(child: Text("第5组")),
+        ),
+      ],
+    );
+
+    return bodyWidget;
   }
 }
