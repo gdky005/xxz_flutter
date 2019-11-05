@@ -77,36 +77,21 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _bodyView() {
-    Widget bodyWidget = GridView(
+    Widget bodyWidget = GridView.builder(
       //SliverGridDelegateWithFixedCrossAxisCount可以直接指定每行（列）显示多少个Item，SliverGridDelegateWithMaxCrossAxisExtent会根据GridView的宽度和你设置的每个的宽度来自动计算没行显示多少个Item
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2, //每行2个
+        crossAxisCount: 3, //每行3个
         mainAxisSpacing: 10.0, //主轴方向间距
         crossAxisSpacing: 10.0, //水平方向间距
         childAspectRatio: 1.0, //纵轴缩放比例
       ),
-      children: <Widget>[
-        Container(
+      itemCount: 10,
+      itemBuilder: (BuildContext context, int index) {
+        return Container(
           color: Colors.grey[200],
-          child: Center(child: Text("第1组")),
-        ),
-        Container(
-          color: Colors.grey[200],
-          child: Center(child: Text("第2组")),
-        ),
-        Container(
-          color: Colors.grey[200],
-          child: Center(child: Text("第3组")),
-        ),
-        Container(
-          color: Colors.grey[200],
-          child: Center(child: Text("第4组")),
-        ),
-        Container(
-          color: Colors.grey[200],
-          child: Center(child: Text("第5组")),
-        ),
-      ],
+          child: Center(child: Text("当前是第$index个")),
+        );
+      },
     );
 
     return bodyWidget;
