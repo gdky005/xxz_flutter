@@ -77,23 +77,13 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _bodyView() {
-    Widget bodyWidget = GridView.custom(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3, //每行3个
-        mainAxisSpacing: 10.0, //主轴方向间距
-        crossAxisSpacing: 10.0, //水平方向间距
-        childAspectRatio: 1.0, //纵轴缩放比例
-      ),
-      childrenDelegate: SliverChildBuilderDelegate(
-        (context, index) {
-          return Container(
-            color: Colors.grey[200],
-            child: Center(child: Text("当前是第$index个")),
-          );
-        },
-        childCount: 20,
-      ),
-    );
+    Widget bodyWidget = PageView.custom(
+        childrenDelegate: SliverChildBuilderDelegate(
+      (BuildContext context, int index) {
+        return Center(child: Text("PageView custom 当前是第$index个"));
+      },
+      childCount: 3,
+    ));
 
     return bodyWidget;
   }
