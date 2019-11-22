@@ -27,6 +27,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  var _tabList = [
+    Tab(icon: Icon(Icons.looks_one), text: "第一页"),
+    Tab(icon: Icon(Icons.looks_two), text: "第二页"),
+  ];
+
+  var _tabBarViewList = [
+    Center(child: Text("第一页内容")),
+    Center(child: Text("第二页内容"))
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +46,18 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _bodyView() {
-    Widget bodyWidget = TabControllerPage();
+    Widget bodyWidget = DefaultTabController(
+      length: _tabList.length,
+      child: Scaffold(
+        backgroundColor: Colors.white70,
+        appBar: TabBar(
+          tabs: _tabList,
+        ),
+        body: TabBarView(
+          children: _tabBarViewList,
+        ),
+      ),
+    );
     return bodyWidget;
   }
 }
