@@ -55,9 +55,6 @@ class _TabControllerPageState extends State<TabControllerPage>
 
   var _tabBarViewList = [
     Center(child: Text("第一页内容")),
-    Center(child: Text("第一1页内容")),
-    Center(child: Text("第一11页内容")),
-    Center(child: Text("第一111页内容")),
     Center(child: Text("第二页内容"))
   ];
 
