@@ -27,72 +27,27 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var _tabList = [
-    Tab(icon: Icon(Icons.looks_one), text: "第一页"),
-    Tab(icon: Icon(Icons.looks_two), text: "第二页"),
-  ];
-
-  var _tabBarViewList = [
-    Center(child: Text("第一页内容")),
-    Center(child: Text("第二页内容"))
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("TabBar 和 TabBarView")),
-      body: Container(color: Colors.black, child: _bodyView()),
+      appBar: AppBar(title: Text("Drawer")),
+      drawer: _drawer(),
     );
   }
 
-  Widget _bodyView() {
-    Widget bodyWidget = DefaultTabController(
-      length: _tabList.length,
-      child: Scaffold(
-        backgroundColor: Colors.white70,
-        appBar: TabBar(
-          tabs: _tabList,
-        ),
-        body: TabBarView(
-          children: _tabBarViewList,
-        ),
+  Widget _drawer() {
+    return Drawer(
+      child: Column(
+        children: <Widget>[
+          SizedBox(height: 30),
+          ListTile(
+            leading: Icon(Icons.people_outline),
+            title: Text("人群"),
+            subtitle: Text("开发者"),
+            trailing: Icon(Icons.developer_board),
+          ),
+        ],
       ),
-    );
-    return bodyWidget;
-  }
-}
-
-class TabControllerPage extends StatefulWidget {
-  @override
-  _TabControllerPageState createState() => _TabControllerPageState();
-}
-
-class _TabControllerPageState extends State<TabControllerPage>
-    with SingleTickerProviderStateMixin {
-  var _tabList = [
-    Tab(icon: Icon(Icons.looks_one), text: "第一页"),
-    Tab(icon: Icon(Icons.looks_two), text: "第二页"),
-  ];
-
-  var _tabBarViewList = [
-    Center(child: Text("第一页内容")),
-    Center(child: Text("第二页内容"))
-  ];
-
-  TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = new TabController(vsync: this, length: _tabList.length);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white30,
-      appBar: TabBar(controller: _tabController, tabs: _tabList),
-      body: TabBarView(controller: _tabController, children: _tabBarViewList),
     );
   }
 }
