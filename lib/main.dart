@@ -39,7 +39,26 @@ class _MyHomePageState extends State<MyHomePage> {
     return Drawer(
       child: Column(
         children: <Widget>[
-          SizedBox(height: 30),
+          DrawerHeader(
+            decoration: BoxDecoration(color: Colors.grey),
+            margin: EdgeInsets.all(5),
+            padding: EdgeInsets.all(5),
+            duration: Duration(seconds: 10),
+            curve: Curves.easeInSine,
+            child: Container(
+              child: Text(""
+                  "Text1________________\n"
+                  "Text2________________\n"
+                  "Text3________________\n"
+                  "Text4________________\n"
+                  "Text5________________\n"
+                  "Text1________________\n"
+                  "Text2________________\n"
+                  "Text3________________\n"
+                  "Text4________________\n"
+                  ""),
+            ),
+          ),
           ListTile(
             leading: Icon(Icons.people_outline),
             title: Text("人群"),
