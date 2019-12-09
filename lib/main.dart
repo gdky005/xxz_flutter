@@ -39,25 +39,17 @@ class _MyHomePageState extends State<MyHomePage> {
     return Drawer(
       child: Column(
         children: <Widget>[
-          DrawerHeader(
+          UserAccountsDrawerHeader(
             decoration: BoxDecoration(color: Colors.grey),
-            margin: EdgeInsets.all(5),
-            padding: EdgeInsets.all(5),
-            duration: Duration(seconds: 10),
-            curve: Curves.easeInSine,
-            child: Container(
-              child: Text(""
-                  "Text1________________\n"
-                  "Text2________________\n"
-                  "Text3________________\n"
-                  "Text4________________\n"
-                  "Text5________________\n"
-                  "Text1________________\n"
-                  "Text2________________\n"
-                  "Text3________________\n"
-                  "Text4________________\n"
-                  ""),
+            currentAccountPicture: CircleAvatar(
+              child: Image.network("http://gdky005.com/images/avatar.jpg"),
             ),
+            accountEmail: Text("gdky005@126.com"),
+            accountName: Text("王卿"),
+            onDetailsPressed: () {
+              print("点击了内容区域");
+            },
+            arrowColor: Colors.grey,
           ),
           ListTile(
             leading: Icon(Icons.people_outline),
